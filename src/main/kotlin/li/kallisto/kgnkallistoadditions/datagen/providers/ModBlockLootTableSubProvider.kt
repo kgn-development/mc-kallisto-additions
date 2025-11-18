@@ -1,6 +1,6 @@
-package li.kallisto.kgntemplatemod.datagen.providers
+package li.kallisto.kgnkallistoadditions.datagen.providers
 
-import li.kallisto.kgntemplatemod.block.ModBlocks
+import li.kallisto.kgnkallistoadditions.registry.ModRegistries
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.loot.BlockLootSubProvider
 import net.minecraft.world.flag.FeatureFlags
@@ -13,6 +13,6 @@ class ModBlockLootTableSubProvider(registries: HolderLookup.Provider) :
     }
 
     override fun getKnownBlocks(): Iterable<Block> {
-        return ModBlocks.BLOCKS.entries.map { it.get() }
+        return ModRegistries.BLOCKS.entries.map { it.get() }
     }
 }

@@ -1,6 +1,8 @@
 package li.kallisto.kgntemplatemod.datagen
 
-import li.kallisto.kgntemplatemod.datagen.providers.ModBlockLootTableSubProvider
+import li.kallisto.kgnkallistoadditions.datagen.providers.ModBlockLootTableSubProvider
+import li.kallisto.kgnkallistoadditions.datagen.providers.ModEquipmentAssetProvider
+import li.kallisto.kgnkallistoadditions.datagen.providers.ModItemTagProvider
 import li.kallisto.kgntemplatemod.datagen.providers.ModModelProvider
 import net.minecraft.data.loot.LootTableProvider
 import net.minecraft.data.loot.LootTableProvider.SubProviderEntry
@@ -14,6 +16,8 @@ object ModDataGenerator {
         val lookupProvider = event.lookupProvider
 
         generator.addProvider(true, ModModelProvider(packOutput))
+        generator.addProvider(true, ModItemTagProvider(packOutput, lookupProvider))
+        generator.addProvider(true, ModEquipmentAssetProvider(packOutput))
         generator.addProvider(
             true, LootTableProvider(
                 packOutput,
