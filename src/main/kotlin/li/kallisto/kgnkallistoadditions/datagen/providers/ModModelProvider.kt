@@ -2,6 +2,7 @@ package li.kallisto.kgntemplatemod.datagen.providers
 
 import li.kallisto.kgnkallistoadditions.KGNKallistoAdditions
 import li.kallisto.kgnkallistoadditions.persons.michi.MichiCap
+import li.kallisto.kgnkallistoadditions.persons.noel.AppleJuice
 import li.kallisto.kgnkallistoadditions.registry.ModRegistries
 import net.minecraft.client.data.models.BlockModelGenerators
 import net.minecraft.client.data.models.ItemModelGenerators
@@ -17,6 +18,7 @@ class ModModelProvider(output: PackOutput) : ModelProvider(output, KGNKallistoAd
 
     override fun registerModels(blockModels: BlockModelGenerators, itemModels: ItemModelGenerators) {
         itemModels.generateFlatItem(MichiCap.ITEM.get(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(AppleJuice.ITEM.get(), ModelTemplates.FLAT_ITEM)
     }
 
     override fun getKnownBlocks(): Stream<out Holder<Block?>?> {

@@ -2,6 +2,7 @@ package li.kallisto.kgnkallistoadditions
 
 import li.kallisto.kgnkallistoadditions.persons.michi.MichiCap
 import li.kallisto.kgnkallistoadditions.persons.michi.client.MichiCapClient
+import li.kallisto.kgnkallistoadditions.persons.noel.AppleJuice
 import li.kallisto.kgnkallistoadditions.registry.ModRegistries
 import li.kallisto.kgntemplatemod.datagen.ModDataGenerator
 import net.minecraft.resources.ResourceLocation
@@ -27,6 +28,8 @@ object KGNKallistoAdditions {
         MOD_BUS.addListener(ModDataGenerator::onGatherClientData)
 
         MichiCap.register(NeoForge.EVENT_BUS)
+        AppleJuice.register(NeoForge.EVENT_BUS)
+
         runForDist(clientTarget = {
             MichiCapClient.register(MOD_BUS)
         }, serverTarget = {
