@@ -2,6 +2,7 @@ package li.kallisto.kgnkallistoadditions.persons.cosimo
 
 import dev.tocraft.walkers.api.PlayerShape
 import li.kallisto.kgnkallistoadditions.ability.UseAbilityPacket
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
@@ -17,5 +18,17 @@ object AbilityPacketHandler {
             PlayerShape.updateShapes(player, null)
         else
             PlayerShape.updateShapes(player, bat)
+
+        player.level().sendParticles(
+            ParticleTypes.SQUID_INK,
+            player.x,
+            player.y,
+            player.z,
+            500,
+            0.5,
+            0.5,
+            0.5,
+            0.2
+        )
     }
 }
