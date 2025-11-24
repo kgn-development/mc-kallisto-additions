@@ -1,5 +1,7 @@
 package li.kallisto.kgnkallistoadditions
 
+import dev.tocraft.walkers.api.platform.ApiLevel
+import li.kallisto.kgnkallistoadditions.ability.UseAbilityPacket
 import li.kallisto.kgnkallistoadditions.persons.michi.MichiCap
 import li.kallisto.kgnkallistoadditions.persons.michi.client.MichiCapClient
 import li.kallisto.kgnkallistoadditions.persons.noel.AppleJuice
@@ -8,11 +10,13 @@ import li.kallisto.kgntemplatemod.datagen.ModDataGenerator
 import net.minecraft.resources.ResourceLocation
 import net.neoforged.fml.common.Mod
 import net.neoforged.neoforge.common.NeoForge
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.neoforge.forge.runForDist
+
 
 @Mod(KGNKallistoAdditions.ID)
 object KGNKallistoAdditions {
@@ -26,18 +30,33 @@ object KGNKallistoAdditions {
         ModRegistries.register(MOD_BUS)
 
         MOD_BUS.addListener(ModDataGenerator::onGatherClientData)
+        MOD_BUS.addListener(::registerPayloads)
 
         MichiCap.register(NeoForge.EVENT_BUS)
         AppleJuice.register(NeoForge.EVENT_BUS)
 
+        ApiLevel.setApiLevel(ApiLevel.API_ONLY);
+
         runForDist(clientTarget = {
             MichiCapClient.register(MOD_BUS)
+            KGNKallistoAdditionsClient.register(MOD_BUS, NeoForge.EVENT_BUS)
         }, serverTarget = {
 
         })
+    }
+
+    fun registerPayloads(event: RegisterPayloadHandlersEvent) {
+        val registrar = event.registrar(ID)
+
+        registrar.playToServer(
+            UseAbilityPacket.TYPE,
+            UseAbilityPacket.STREAM_CODEC,
+            UseAbilityPacket::handle
+        )
     }
 
     fun locate(name: String): ResourceLocation {
         return ResourceLocation.fromNamespaceAndPath(ID, name)
     }
 }
+
