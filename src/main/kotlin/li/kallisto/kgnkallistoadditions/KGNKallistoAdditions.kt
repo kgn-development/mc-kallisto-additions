@@ -2,6 +2,9 @@ package li.kallisto.kgnkallistoadditions
 
 import dev.tocraft.walkers.api.platform.ApiLevel
 import li.kallisto.kgnkallistoadditions.ability.UseAbilityPacket
+import li.kallisto.kgnkallistoadditions.persons.cosimo.Druid
+import li.kallisto.kgnkallistoadditions.persons.leya.PaintBrush
+import li.kallisto.kgnkallistoadditions.persons.leya.PaintBrushClient
 import li.kallisto.kgnkallistoadditions.persons.lukas.StinkyTouch
 import li.kallisto.kgnkallistoadditions.persons.michi.MichiCap
 import li.kallisto.kgnkallistoadditions.persons.michi.client.MichiCapClient
@@ -36,11 +39,14 @@ object KGNKallistoAdditions {
         MichiCap.register(NeoForge.EVENT_BUS)
         AppleJuice.register(NeoForge.EVENT_BUS)
         StinkyTouch.register(NeoForge.EVENT_BUS)
+        Druid.register(NeoForge.EVENT_BUS)
+        PaintBrush.register(NeoForge.EVENT_BUS)
 
         ApiLevel.setApiLevel(ApiLevel.API_ONLY);
 
         runForDist(clientTarget = {
             MichiCapClient.register(MOD_BUS)
+            PaintBrushClient.register(MOD_BUS)
             KGNKallistoAdditionsClient.register(MOD_BUS, NeoForge.EVENT_BUS)
         }, serverTarget = {
 

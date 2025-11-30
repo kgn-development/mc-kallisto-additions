@@ -1,9 +1,6 @@
 package li.kallisto.kgntemplatemod.datagen
 
-import li.kallisto.kgnkallistoadditions.datagen.providers.ModBlockLootTableSubProvider
-import li.kallisto.kgnkallistoadditions.datagen.providers.ModEquipmentAssetProvider
-import li.kallisto.kgnkallistoadditions.datagen.providers.ModItemTagProvider
-import li.kallisto.kgnkallistoadditions.datagen.providers.ModRecipeProvider
+import li.kallisto.kgnkallistoadditions.datagen.providers.*
 import li.kallisto.kgntemplatemod.datagen.providers.ModModelProvider
 import net.minecraft.data.loot.LootTableProvider
 import net.minecraft.data.loot.LootTableProvider.SubProviderEntry
@@ -20,6 +17,7 @@ object ModDataGenerator {
         generator.addProvider(true, ModRecipeProvider.Runner(packOutput, lookupProvider))
         generator.addProvider(true, ModItemTagProvider(packOutput, lookupProvider))
         generator.addProvider(true, ModEquipmentAssetProvider(packOutput))
+        generator.addProvider(true, ModParticleProvider(packOutput))
         generator.addProvider(
             true, LootTableProvider(
                 packOutput,

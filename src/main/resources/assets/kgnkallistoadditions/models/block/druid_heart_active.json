@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "kgnkallistoadditions:block/druid_heart_active_top",
+    "side": "kgnkallistoadditions:block/druid_heart_active"
+  }
+}

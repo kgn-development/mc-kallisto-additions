@@ -12,6 +12,7 @@ import net.neoforged.bus.api.IEventBus
 import net.neoforged.neoforge.attachment.AttachmentType
 import net.neoforged.neoforge.event.RegisterCommandsEvent
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
+import net.neoforged.neoforge.event.entity.player.PlayerEvent
 import java.util.*
 
 object StinkyTouch {
@@ -25,6 +26,13 @@ object StinkyTouch {
     fun register(eventBus: IEventBus) {
         eventBus.addListener(this::onLivingDamage)
         eventBus.addListener(this::registerCommands)
+        eventBus.addListener(this::onPlayerClone)
+    }
+
+    fun onPlayerClone(event: PlayerEvent.Clone) {
+        if (!event.isWasDeath) return
+
+        event.entity.setData(STINKY_ATTACHMENT, event.original.getData(STINKY_ATTACHMENT))
     }
 
     fun registerCommands(event: RegisterCommandsEvent) {

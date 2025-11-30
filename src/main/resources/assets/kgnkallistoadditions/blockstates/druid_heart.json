@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "kgnkallistoadditions:block/druid_heart"
+    },
+    "active=true": {
+      "model": "kgnkallistoadditions:block/druid_heart_active"
+    }
+  }
+}
