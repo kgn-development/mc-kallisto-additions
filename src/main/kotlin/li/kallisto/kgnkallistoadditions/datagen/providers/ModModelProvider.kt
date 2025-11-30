@@ -2,6 +2,7 @@ package li.kallisto.kgntemplatemod.datagen.providers
 
 import li.kallisto.kgnkallistoadditions.KGNKallistoAdditions
 import li.kallisto.kgnkallistoadditions.persons.cosimo.Druid
+import li.kallisto.kgnkallistoadditions.persons.ginger.Trumpet
 import li.kallisto.kgnkallistoadditions.persons.leya.PaintBrush
 import li.kallisto.kgnkallistoadditions.persons.michi.MichiCap
 import li.kallisto.kgnkallistoadditions.persons.noel.AppleJuice
@@ -21,6 +22,7 @@ class ModModelProvider(output: PackOutput) : ModelProvider(output, KGNKallistoAd
     override fun registerModels(blockModels: BlockModelGenerators, itemModels: ItemModelGenerators) {
         itemModels.generateFlatItem(MichiCap.ITEM.get(), ModelTemplates.FLAT_ITEM)
         itemModels.generateFlatItem(AppleJuice.ITEM.get(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(Trumpet.ITEM.get(), ModelTemplates.FLAT_HANDHELD_ITEM)
         itemModels.generateFlatItem(PaintBrush.ITEM.get(), ModelTemplates.FLAT_HANDHELD_ITEM)
         itemModels.generateFlatItem(Druid.DRUID_STAFF.get(), ModelTemplates.FLAT_HANDHELD_ITEM)
     }

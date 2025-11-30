@@ -17,6 +17,7 @@ object ModDataGenerator {
         generator.addProvider(true, ModRecipeProvider.Runner(packOutput, lookupProvider))
         generator.addProvider(true, ModItemTagProvider(packOutput, lookupProvider))
         generator.addProvider(true, ModEquipmentAssetProvider(packOutput))
+        generator.addProvider(true, ModSoundDefinitionsProvider(packOutput))
         generator.addProvider(true, ModParticleProvider(packOutput))
         generator.addProvider(
             true, LootTableProvider(

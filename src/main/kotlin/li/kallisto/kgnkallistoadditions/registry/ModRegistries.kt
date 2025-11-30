@@ -12,12 +12,14 @@ object ModRegistries {
     val BLOCKS = DeferredRegister.createBlocks(KGNKallistoAdditions.ID)
     val ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, KGNKallistoAdditions.ID)
     val PARTICLE_TYPE = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, KGNKallistoAdditions.ID)
+    val SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, KGNKallistoAdditions.ID)
 
     fun register(eventBus: IEventBus) {
         ITEMS.register(eventBus)
         BLOCKS.register(eventBus)
         ATTACHMENT_TYPES.register(eventBus)
         PARTICLE_TYPE.register(eventBus)
+        SOUND_EVENTS.register(eventBus)
         ModCreativeModeTabs.register(eventBus)
     }
 }

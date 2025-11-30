@@ -1,0 +1,12 @@
+{
+  "trumpet_sound": {
+    "replace": true,
+    "sounds": [
+      {
+        "attenuation_distance": 12,
+        "name": "kgnkallistoadditions:trumpet_sound",
+        "preload": true
+      }
+    ]
+  }
+}
