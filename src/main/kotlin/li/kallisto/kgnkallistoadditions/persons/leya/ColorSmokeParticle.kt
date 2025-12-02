@@ -25,11 +25,14 @@ class ColorSmokeParticle(
         this.zd = zSpeed
 
         val colors = listOf(
-            Vec3(1.0, 0.1, 0.1),
-            Vec3(0.1, 1.0, 0.1),
-            Vec3(0.1, 0.1, 1.0),
-            Vec3(1.0, 0.6, 0.1),
-            Vec3(0.8, 0.2, 1.0)
+            Vec3(0.039, 0.823, 1.000),
+            Vec3(0.160, 0.384, 1.000),
+            Vec3(0.584, 0.000, 1.000),
+            Vec3(1.000, 0.549, 0.000),
+            Vec3(0.705, 0.901, 0.000),
+            Vec3(0.058, 1.000, 0.858),
+            Vec3(1.000, 0.933, 0.000),
+            Vec3(1.000, 0.000, 0.631)
         ).random()
 
         setColor(colors.x.toFloat(), colors.y.toFloat(), colors.z.toFloat())
