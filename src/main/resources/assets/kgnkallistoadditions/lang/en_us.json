@@ -1,9 +1,13 @@
 {
   "creativetab.kgnkallistoadditions.kallisto_abilities_tab": "KGN Additions",
   "item.kgnkallistoadditions.michi_cap": "Michi's Tschäpper",
+  "item.kgnkallistoadditions.luca_beanie": "Luca's Beanie",
+  "item.kgnkallistoadditions.joel_mustache": "Joel's Schnauz",
   "item.kgnkallistoadditions.apple_juice": "Öpfelsaft",
   "item.kgnkallistoadditions.paintbrush_sword": "Leya's Pinsel",
   "item.kgnkallistoadditions.druid_staff": "Druid Staff",
   "item.kgnkallistoadditions.trumpet": "Ginger's Trumpet",
-  "block.kgnkallistoadditions.druid_heart": "Druid Heart"
+  "block.kgnkallistoadditions.druid_heart": "Druid Heart",
+  "key.categories.kgnkallistoadditions.gameplay": "KGN Additions",
+  "key.kgnkallistoadditions.ability": "Do Something"
 }

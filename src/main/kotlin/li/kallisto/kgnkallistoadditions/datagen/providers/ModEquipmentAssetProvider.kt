@@ -1,6 +1,8 @@
 package li.kallisto.kgnkallistoadditions.datagen.providers
 
 import li.kallisto.kgnkallistoadditions.KGNKallistoAdditions
+import li.kallisto.kgnkallistoadditions.persons.joel.JoelMustache
+import li.kallisto.kgnkallistoadditions.persons.luca.LucaBeanie
 import li.kallisto.kgnkallistoadditions.persons.michi.MichiCap
 import net.minecraft.client.data.models.EquipmentAssetProvider
 import net.minecraft.client.resources.model.EquipmentClientInfo
@@ -36,6 +38,20 @@ class ModEquipmentAssetProvider(output: PackOutput) : EquipmentAssetProvider(out
                 MichiCap.ASSET,
                 EquipmentClientInfo.builder()
                     .addMainHumanoidLayer(KGNKallistoAdditions.locate(MichiCap.ID), false)
+                    .build()
+            )
+
+            output.accept(
+                LucaBeanie.ASSET,
+                EquipmentClientInfo.builder()
+                    .addMainHumanoidLayer(KGNKallistoAdditions.locate(LucaBeanie.ID), false)
+                    .build()
+            )
+
+            output.accept(
+                JoelMustache.ASSET,
+                EquipmentClientInfo.builder()
+                    .addMainHumanoidLayer(KGNKallistoAdditions.locate(JoelMustache.ID), false)
                     .build()
             )
         }

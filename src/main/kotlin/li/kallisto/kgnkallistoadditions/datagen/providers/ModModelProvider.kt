@@ -3,7 +3,9 @@ package li.kallisto.kgntemplatemod.datagen.providers
 import li.kallisto.kgnkallistoadditions.KGNKallistoAdditions
 import li.kallisto.kgnkallistoadditions.persons.cosimo.Druid
 import li.kallisto.kgnkallistoadditions.persons.ginger.Trumpet
+import li.kallisto.kgnkallistoadditions.persons.joel.JoelMustache
 import li.kallisto.kgnkallistoadditions.persons.leya.PaintBrush
+import li.kallisto.kgnkallistoadditions.persons.luca.LucaBeanie
 import li.kallisto.kgnkallistoadditions.persons.michi.MichiCap
 import li.kallisto.kgnkallistoadditions.persons.noel.AppleJuice
 import li.kallisto.kgnkallistoadditions.registry.ModRegistries
@@ -21,6 +23,8 @@ class ModModelProvider(output: PackOutput) : ModelProvider(output, KGNKallistoAd
 
     override fun registerModels(blockModels: BlockModelGenerators, itemModels: ItemModelGenerators) {
         itemModels.generateFlatItem(MichiCap.ITEM.get(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(LucaBeanie.ITEM.get(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(JoelMustache.ITEM.get(), ModelTemplates.FLAT_ITEM)
         itemModels.generateFlatItem(AppleJuice.ITEM.get(), ModelTemplates.FLAT_ITEM)
         itemModels.generateFlatItem(Trumpet.ITEM.get(), ModelTemplates.FLAT_HANDHELD_ITEM)
         itemModels.generateFlatItem(PaintBrush.ITEM.get(), ModelTemplates.FLAT_HANDHELD_ITEM)

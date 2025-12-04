@@ -12,7 +12,7 @@ import org.lwjgl.glfw.GLFW
 
 object KGNKallistoAdditionsClient {
     val ABILITY_KEY = KeyMapping(
-        "key.mod.ability",
+        "key.${KGNKallistoAdditions.ID}.ability",
         KeyConflictContext.IN_GAME,
         InputConstants.Type.KEYSYM,
         GLFW.GLFW_KEY_G,

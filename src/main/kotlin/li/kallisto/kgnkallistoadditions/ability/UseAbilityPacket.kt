@@ -1,7 +1,6 @@
 package li.kallisto.kgnkallistoadditions.ability
 
 import li.kallisto.kgnkallistoadditions.KGNKallistoAdditions
-import li.kallisto.kgnkallistoadditions.persons.cosimo.AbilityPacketHandler
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
@@ -21,7 +20,9 @@ class UseAbilityPacket() : CustomPacketPayload {
             )
 
         fun handle(message: UseAbilityPacket, context: IPayloadContext) {
-            AbilityPacketHandler.handle(message, context)
+            li.kallisto.kgnkallistoadditions.persons.cosimo.AbilityPacketHandler.handle(message, context)
+            li.kallisto.kgnkallistoadditions.persons.luca.AbilityPacketHandler.handle(message, context)
+            li.kallisto.kgnkallistoadditions.persons.joel.AbilityPacketHandler.handle(message, context)
         }
     }
 }
