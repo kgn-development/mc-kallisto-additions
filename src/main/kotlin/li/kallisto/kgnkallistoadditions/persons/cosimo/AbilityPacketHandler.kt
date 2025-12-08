@@ -7,7 +7,7 @@ import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.ambient.Bat
+import net.minecraft.world.entity.animal.wolf.Wolf
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
 object AbilityPacketHandler {
@@ -16,14 +16,14 @@ object AbilityPacketHandler {
 
         if (!player.getData(DRUID_ATTACHMENT).isDruid) return
 
-        val bat = EntityType.BAT.create(player.level(), EntitySpawnReason.COMMAND)
-        if (PlayerShape.getCurrentShape(player) is Bat)
+        val wolf = EntityType.WOLF.create(player.level(), EntitySpawnReason.COMMAND)
+        if (PlayerShape.getCurrentShape(player) is Wolf)
             PlayerShape.updateShapes(player, null)
         else
-            PlayerShape.updateShapes(player, bat)
+            PlayerShape.updateShapes(player, wolf)
 
         player.level().sendParticles(
-            ParticleTypes.SQUID_INK,
+            ParticleTypes.PALE_OAK_LEAVES,
             player.x,
             player.y,
             player.z,
