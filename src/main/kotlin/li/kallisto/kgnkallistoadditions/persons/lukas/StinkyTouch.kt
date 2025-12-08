@@ -59,7 +59,7 @@ object StinkyTouch {
 
     fun onLivingDamage(event: LivingDamageEvent.Pre) {
         val player = event.source.directEntity
-        if (player !is ServerPlayer) return
+        if (player !is ServerPlayer || event.entity !is ServerPlayer) return
 
         if (player.uuid == DEHEEEB && event.entity.getData(STINKY_ATTACHMENT)) {
             event.entity.addEffect(

@@ -46,7 +46,7 @@ object AppleJuice {
         fun onEntityJoin(event: EntityJoinLevelEvent) {
             val entity = event.entity
             val level = entity.level()
-            if (level !is ServerLevel || !level.gameRules.getBoolean(AppleJuice.RULE_SHOULD_EXPLODE)) return
+            if (level !is ServerLevel) return
 
             if (entity is ItemEntity && entity.item.`is`(AppleJuice.ITEM)) {
                 tracked.add(entity)
@@ -57,10 +57,11 @@ object AppleJuice {
         fun onEntityTick(event: EntityTickEvent.Pre) {
             val entity = event.entity
             val level = entity.level()
-            if (level !is ServerLevel || !level.gameRules.getBoolean(AppleJuice.RULE_SHOULD_EXPLODE)) return
+            if (level !is ServerLevel) return
 
             if (entity !is ItemEntity) return
             if (!tracked.contains(entity)) return
+            if (level.gameRules.getBoolean(AppleJuice.RULE_SHOULD_EXPLODE) == false) return
 
             val pos = entity.blockPosition()
             val blockState: BlockState = level.getBlockState(pos)
