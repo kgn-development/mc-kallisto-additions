@@ -2,6 +2,7 @@ package li.kallisto.kgnkallistoadditions.persons.luca
 
 import li.kallisto.kgnkallistoadditions.registry.ModRegistries
 import li.kallisto.kgnkallistoadditions.registry.RegistryHelper
+import li.kallisto.kgnkallistoadditions.registry.RegistryHelper.registerBlockWithItem
 import net.minecraft.Util
 import net.minecraft.resources.ResourceKey
 import net.minecraft.sounds.SoundEvents
@@ -11,6 +12,9 @@ import net.minecraft.world.item.equipment.ArmorMaterial
 import net.minecraft.world.item.equipment.ArmorType
 import net.minecraft.world.item.equipment.EquipmentAsset
 import net.minecraft.world.item.equipment.EquipmentAssets
+import net.minecraft.world.level.block.FireflyBushBlock
+import net.minecraft.world.level.block.SoundType
+import net.minecraft.world.level.block.state.BlockBehaviour
 import net.neoforged.bus.api.IEventBus
 import java.util.*
 import java.util.function.Consumer
@@ -23,6 +27,24 @@ object LucaBeanie {
     }
 
     val ITEM = ModRegistries.ITEMS.register(ID, ::LucaBeanieItem)
+
+    val BLOCK =
+        run {
+            val properties = BlockBehaviour.Properties.of()
+                .noOcclusion()
+                .instabreak()
+                .lightLevel { 12 }
+                .sound(SoundType.CROP)
+                .noCollission()
+
+            registerBlockWithItem(
+                "cannabeanikum_solaris",
+                { FireflyBushBlock(properties) },
+                properties,
+                Item.Properties()
+            )
+        }
+
 
     var ASSET: ResourceKey<EquipmentAsset?> = EquipmentAssets.createId(ID)
 

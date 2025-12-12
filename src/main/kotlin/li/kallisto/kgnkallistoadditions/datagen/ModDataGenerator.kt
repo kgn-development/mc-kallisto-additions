@@ -1,7 +1,6 @@
 package li.kallisto.kgntemplatemod.datagen
 
 import li.kallisto.kgnkallistoadditions.datagen.providers.*
-import li.kallisto.kgntemplatemod.datagen.providers.ModModelProvider
 import net.minecraft.data.loot.LootTableProvider
 import net.minecraft.data.loot.LootTableProvider.SubProviderEntry
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets

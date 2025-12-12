@@ -17,6 +17,10 @@ object RegistryHelper {
         return this.setId(ResourceKey.create(Registries.ITEM, KGNKallistoAdditions.locate(name)))
     }
 
+    fun BlockBehaviour.Properties.setBlockModId(name: String): BlockBehaviour.Properties {
+        return this.setId(ResourceKey.create(Registries.BLOCK, KGNKallistoAdditions.locate(name)))
+    }
+
     fun createTag(name: String): TagKey<Item?> {
         return ItemTags.create(KGNKallistoAdditions.locate(name))
     }

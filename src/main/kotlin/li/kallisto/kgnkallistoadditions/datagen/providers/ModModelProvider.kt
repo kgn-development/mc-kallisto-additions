@@ -1,4 +1,4 @@
-package li.kallisto.kgntemplatemod.datagen.providers
+package li.kallisto.kgnkallistoadditions.datagen.providers
 
 import li.kallisto.kgnkallistoadditions.KGNKallistoAdditions
 import li.kallisto.kgnkallistoadditions.persons.cosimo.Druid
@@ -24,7 +24,9 @@ class ModModelProvider(output: PackOutput) : ModelProvider(output, KGNKallistoAd
     override fun registerModels(blockModels: BlockModelGenerators, itemModels: ItemModelGenerators) {
         itemModels.generateFlatItem(MichiCap.ITEM.get(), ModelTemplates.FLAT_ITEM)
         itemModels.generateFlatItem(LucaBeanie.ITEM.get(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(LucaBeanie.BLOCK.asItem(), ModelTemplates.FLAT_ITEM)
         itemModels.generateFlatItem(JoelMustache.ITEM.get(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(JoelMustache.BLOCK.asItem(), ModelTemplates.FLAT_ITEM)
         itemModels.generateFlatItem(AppleJuice.ITEM.get(), ModelTemplates.FLAT_ITEM)
         itemModels.generateFlatItem(Trumpet.ITEM.get(), ModelTemplates.FLAT_HANDHELD_ITEM)
         itemModels.generateFlatItem(PaintBrush.ITEM.get(), ModelTemplates.FLAT_HANDHELD_ITEM)
@@ -32,7 +34,7 @@ class ModModelProvider(output: PackOutput) : ModelProvider(output, KGNKallistoAd
     }
 
     override fun getKnownBlocks(): Stream<out Holder<Block?>?> {
-        return ModRegistries.BLOCKS.entries.stream().filter { !it.`is`(Druid.DRUID_HEART) }
+        return emptyList<Holder<Block?>>().stream()
     }
 
     override fun getKnownItems(): Stream<out Holder<Item?>?> {
