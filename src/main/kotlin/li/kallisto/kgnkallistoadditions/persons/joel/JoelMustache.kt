@@ -43,7 +43,7 @@ object JoelMustache {
     var ASSET: ResourceKey<EquipmentAsset?> = EquipmentAssets.createId(ID)
 
     val ARMOR_MATERIAL = ArmorMaterial(
-        -1,
+        37,
         Util.make(
             EnumMap(ArmorType::class.java),
             Consumer { attribute: EnumMap<ArmorType?, Int?>? ->
