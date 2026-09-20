@@ -11,12 +11,14 @@ import net.neoforged.neoforge.client.settings.KeyConflictContext
 import org.lwjgl.glfw.GLFW
 
 object KGNKallistoAdditionsClient {
+    val ABILITY_CATEGORY = KeyMapping.Category(KGNKallistoAdditions.locate("gameplay"))
+
     val ABILITY_KEY = KeyMapping(
         "key.${KGNKallistoAdditions.ID}.ability",
         KeyConflictContext.IN_GAME,
         InputConstants.Type.KEYSYM,
         GLFW.GLFW_KEY_G,
-        "key.categories.${KGNKallistoAdditions.ID}.gameplay"
+        ABILITY_CATEGORY
     )
 
     fun register(modEventBus: IEventBus, eventBus: IEventBus) {
@@ -31,6 +33,7 @@ object KGNKallistoAdditionsClient {
     }
 
     fun registerKeys(event: RegisterKeyMappingsEvent) {
+        event.registerCategory(ABILITY_CATEGORY)
         event.register(ABILITY_KEY)
     }
 }

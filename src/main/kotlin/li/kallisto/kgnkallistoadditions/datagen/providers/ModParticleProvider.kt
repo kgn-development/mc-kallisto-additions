@@ -10,7 +10,7 @@ class ModParticleProvider(
 ) : ParticleDescriptionProvider(output) {
 
     override fun addDescriptions() {
-        sprite(
+        spriteSet(
             PaintBrush.COLOR_SPLASH_PARTICLE.get(),
             KGNKallistoAdditions.locate("color_splash")
         )

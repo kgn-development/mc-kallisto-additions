@@ -35,7 +35,7 @@ object JoelMustache {
                 .instabreak()
                 .lightLevel { 12 }
                 .sound(SoundType.CROP)
-                .noCollission()
+                .noCollision()
 
             registerBlockWithItem("moubatzius_lunar", { FireflyBushBlock(properties) }, properties, Item.Properties())
         }

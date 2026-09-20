@@ -1,22 +1,20 @@
 package li.kallisto.kgnkallistoadditions.persons.leya
 
 import net.minecraft.client.multiplayer.ClientLevel
-import net.minecraft.client.particle.ParticleRenderType
+import net.minecraft.client.particle.SingleQuadParticle
 import net.minecraft.client.particle.SpriteSet
-import net.minecraft.client.particle.TextureSheetParticle
 import net.minecraft.world.phys.Vec3
 
 class ColorSmokeParticle(
     level: ClientLevel,
     x: Double, y: Double, z: Double,
     xSpeed: Double, ySpeed: Double, zSpeed: Double, spriteSet: SpriteSet
-) : TextureSheetParticle(level, x, y, z) {
-    override fun getRenderType(): ParticleRenderType =
-        ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT
+) : SingleQuadParticle(level, x, y, z, spriteSet.first()) {
+    override fun getLayer(): Layer = Layer.TRANSLUCENT
 
     init {
         lifetime = 320 + random.nextInt(100)
-        pickSprite(spriteSet)
+        setSprite(spriteSet.get(random))
         scale(3f)
         setSize(0.25f, 0.25f)
 

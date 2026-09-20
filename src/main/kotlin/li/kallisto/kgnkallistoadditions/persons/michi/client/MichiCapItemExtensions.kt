@@ -14,8 +14,8 @@ object MichiCapItemExtensions : IClientItemExtensions {
     override fun getHumanoidArmorModel(
         itemStack: ItemStack,
         layerType: EquipmentClientInfo.LayerType,
-        original: Model
-    ): Model {
+        original: Model<*>
+    ): Model<*> {
         return HumanoidModel<HumanoidRenderState>(
             ModelPart(
                 mutableListOf<ModelPart.Cube?>(), Map.of<String?, ModelPart?>(

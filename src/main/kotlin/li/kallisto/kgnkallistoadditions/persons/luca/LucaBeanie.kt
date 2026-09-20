@@ -35,7 +35,7 @@ object LucaBeanie {
                 .instabreak()
                 .lightLevel { 12 }
                 .sound(SoundType.CROP)
-                .noCollission()
+                .noCollision()
 
             registerBlockWithItem(
                 "cannabeanikum_solaris",

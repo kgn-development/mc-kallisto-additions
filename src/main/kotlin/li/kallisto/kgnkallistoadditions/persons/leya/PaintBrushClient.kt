@@ -11,10 +11,8 @@ object PaintBrushClient {
 
     fun registerParticleFactories(event: RegisterParticleProvidersEvent) {
         event.registerSpriteSet(PaintBrush.COLOR_SPLASH_PARTICLE.get()) { spriteSet ->
-            ParticleProvider { _, level, x, y, z, xSpeed, ySpeed, zSpeed ->
-                ColorSmokeParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, spriteSet).apply {
-                    pickSprite(spriteSet)
-                }
+            ParticleProvider { _, level, x, y, z, xSpeed, ySpeed, zSpeed, _ ->
+                ColorSmokeParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, spriteSet)
             }
         }
     }
