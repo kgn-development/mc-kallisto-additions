@@ -1,33 +1,18 @@
-package li.kallisto.kgntemplatemod.datagen
+package li.kallisto.kgnkallistoadditions.datagen
 
-import li.kallisto.kgnkallistoadditions.datagen.providers.*
-import net.minecraft.data.loot.LootTableProvider
-import net.minecraft.data.loot.LootTableProvider.SubProviderEntry
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
-import net.neoforged.neoforge.data.event.GatherDataEvent
+import li.kallisto.kgnkallistoadditions.datagen.providers.ModBlockLootTableSubProvider
+import li.kallisto.kgnkallistoadditions.datagen.providers.ModItemTagProvider
+import li.kallisto.kgnkallistoadditions.datagen.providers.ModModelProvider
+import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator.Pack
 
-object ModDataGenerator {
-    fun onGatherClientData(event: GatherDataEvent.Client) {
-        val generator = event.generator
-        val packOutput = generator.packOutput
-        val lookupProvider = event.lookupProvider
+class ModDataGenerator : DataGeneratorEntrypoint {
+    override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {
+        val pack = fabricDataGenerator.createPack()
 
-        generator.addProvider(true, ModModelProvider(packOutput))
-        generator.addProvider(true, ModItemTagProvider(packOutput, lookupProvider))
-        generator.addProvider(true, ModEquipmentAssetProvider(packOutput))
-        generator.addProvider(true, ModParticleProvider(packOutput))
-        generator.addProvider(
-            true, LootTableProvider(
-                packOutput,
-                setOf(),
-                listOf(
-                    SubProviderEntry(
-                        ::ModBlockLootTableSubProvider,
-                        LootContextParamSets.BLOCK
-                    )
-                ),
-                lookupProvider
-            )
-        )
+        pack.addProvider(FabricDataGenerator.Pack.Factory(::ModModelProvider))
+        pack.addProvider(FabricDataGenerator.Pack.RegistryDependentFactory(::ModItemTagProvider))
+        pack.addProvider(FabricDataGenerator.Pack.RegistryDependentFactory(::ModBlockLootTableSubProvider))
     }
 }

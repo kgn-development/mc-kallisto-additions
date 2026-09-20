@@ -1,37 +1,27 @@
 package li.kallisto.kgnkallistoadditions.datagen.providers
 
-import li.kallisto.kgnkallistoadditions.KGNKallistoAdditions
 import li.kallisto.kgnkallistoadditions.persons.joel.JoelMustache
 import li.kallisto.kgnkallistoadditions.persons.leya.PaintBrush
 import li.kallisto.kgnkallistoadditions.persons.luca.LucaBeanie
 import li.kallisto.kgnkallistoadditions.persons.michi.MichiCap
-import li.kallisto.kgnkallistoadditions.registry.ModRegistries
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.minecraft.client.data.models.BlockModelGenerators
 import net.minecraft.client.data.models.ItemModelGenerators
-import net.minecraft.client.data.models.ModelProvider
 import net.minecraft.client.data.models.model.ModelTemplates
-import net.minecraft.core.Holder
-import net.minecraft.data.PackOutput
-import net.minecraft.world.item.Item
-import net.minecraft.world.level.block.Block
-import java.util.stream.Stream
 
-class ModModelProvider(output: PackOutput) : ModelProvider(output, KGNKallistoAdditions.ID) {
+class ModModelProvider(output: FabricPackOutput) : FabricModelProvider(output) {
 
-    override fun registerModels(blockModels: BlockModelGenerators, itemModels: ItemModelGenerators) {
-        itemModels.generateFlatItem(MichiCap.ITEM.get(), ModelTemplates.FLAT_ITEM)
-        itemModels.generateFlatItem(LucaBeanie.ITEM.get(), ModelTemplates.FLAT_ITEM)
-        itemModels.generateFlatItem(LucaBeanie.BLOCK.asItem(), ModelTemplates.FLAT_ITEM)
-        itemModels.generateFlatItem(JoelMustache.ITEM.get(), ModelTemplates.FLAT_ITEM)
-        itemModels.generateFlatItem(JoelMustache.BLOCK.asItem(), ModelTemplates.FLAT_ITEM)
-        itemModels.generateFlatItem(PaintBrush.ITEM.get(), ModelTemplates.FLAT_HANDHELD_ITEM)
+    override fun generateBlockStateModels(blockModels: BlockModelGenerators) {
+        // Blockstates/models are hand-authored under src/main/resources.
     }
 
-    override fun getKnownBlocks(): Stream<out Holder<Block>> {
-        return emptyList<Holder<Block>>().stream()
-    }
-
-    override fun getKnownItems(): Stream<out Holder<Item>> {
-        return ModRegistries.ITEMS.entries.stream().filter { true }
+    override fun generateItemModels(itemModels: ItemModelGenerators) {
+        itemModels.generateFlatItem(MichiCap.ITEM.value(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(LucaBeanie.ITEM.value(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(LucaBeanie.BLOCK.value().asItem(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(JoelMustache.ITEM.value(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(JoelMustache.BLOCK.value().asItem(), ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(PaintBrush.ITEM.value(), ModelTemplates.FLAT_HANDHELD_ITEM)
     }
 }

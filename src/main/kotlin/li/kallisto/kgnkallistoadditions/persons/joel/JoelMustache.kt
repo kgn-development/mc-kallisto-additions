@@ -1,8 +1,8 @@
 package li.kallisto.kgnkallistoadditions.persons.joel
 
-import li.kallisto.kgnkallistoadditions.registry.ModRegistries
 import li.kallisto.kgnkallistoadditions.registry.RegistryHelper
 import li.kallisto.kgnkallistoadditions.registry.RegistryHelper.registerBlockWithItem
+import li.kallisto.kgnkallistoadditions.registry.RegistryHelper.registerItem
 import net.minecraft.util.Util
 import net.minecraft.resources.ResourceKey
 import net.minecraft.sounds.SoundEvents
@@ -15,7 +15,6 @@ import net.minecraft.world.item.equipment.EquipmentAssets
 import net.minecraft.world.level.block.FireflyBushBlock
 import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.level.block.state.BlockBehaviour
-import net.neoforged.bus.api.IEventBus
 import java.util.*
 import java.util.function.Consumer
 
@@ -26,20 +25,9 @@ object JoelMustache {
         val REPARIS_JOEL_MUSTACHE: TagKey<Item> = RegistryHelper.createTag("repairs_${ID}")
     }
 
-    val ITEM = ModRegistries.ITEMS.register(ID, ::JoelMustacheItem)
-
-    val BLOCK =
-        run {
-            val properties = BlockBehaviour.Properties.of()
-                .noOcclusion()
-                .instabreak()
-                .lightLevel { 12 }
-                .sound(SoundType.CROP)
-                .noCollision()
-
-            registerBlockWithItem("moubatzius_lunar", { FireflyBushBlock(properties) }, properties, Item.Properties())
-        }
-
+    // ARMOR_MATERIAL must be initialized before ITEM: JoelMustacheItem's constructor
+    // reads it eagerly now that registration happens at class-init instead of being
+    // deferred to a later registry-event phase like NeoForge's DeferredRegister did.
     var ASSET: ResourceKey<EquipmentAsset> = EquipmentAssets.createId(ID)
 
     val ARMOR_MATERIAL = ArmorMaterial(
@@ -57,6 +45,21 @@ object JoelMustache {
         ASSET
     )
 
-    fun register(eventBus: IEventBus) {
+    val ITEM = registerItem(ID, JoelMustacheItem())
+
+    val BLOCK =
+        run {
+            val properties = BlockBehaviour.Properties.of()
+                .noOcclusion()
+                .instabreak()
+                .lightLevel { 12 }
+                .sound(SoundType.CROP)
+                .noCollision()
+
+            registerBlockWithItem("moubatzius_lunar", { FireflyBushBlock(properties) }, properties, Item.Properties())
+        }
+
+    // Forces class-init in a fixed order from the main entrypoint.
+    fun register() {
     }
 }

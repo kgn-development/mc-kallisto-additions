@@ -1,7 +1,8 @@
 package li.kallisto.kgnkallistoadditions.persons.michi
 
-import li.kallisto.kgnkallistoadditions.registry.ModRegistries
 import li.kallisto.kgnkallistoadditions.registry.RegistryHelper
+import li.kallisto.kgnkallistoadditions.registry.RegistryHelper.registerItem
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents
 import net.minecraft.util.Util
 import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerPlayer
@@ -14,8 +15,6 @@ import net.minecraft.world.item.equipment.ArmorMaterial
 import net.minecraft.world.item.equipment.ArmorType
 import net.minecraft.world.item.equipment.EquipmentAsset
 import net.minecraft.world.item.equipment.EquipmentAssets
-import net.neoforged.bus.api.IEventBus
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent
 import java.util.*
 import java.util.function.Consumer
 
@@ -26,8 +25,9 @@ object MichiCap {
         val REPARIS_MICHI_HAT: TagKey<Item> = RegistryHelper.createTag("repairs_${ID}")
     }
 
-    val ITEM = ModRegistries.ITEMS.register(ID, ::MichiCapItem)
-
+    // ARMOR_MATERIAL must be initialized before ITEM: MichiCapItem's constructor reads
+    // it eagerly now that registration happens at class-init instead of being deferred
+    // to a later registry-event phase like NeoForge's DeferredRegister did.
     var ASSET: ResourceKey<EquipmentAsset> = EquipmentAssets.createId(ID)
 
     val ARMOR_MATERIAL = ArmorMaterial(
@@ -45,31 +45,29 @@ object MichiCap {
         ASSET
     )
 
-    fun register(eventBus: IEventBus) {
-        eventBus.addListener(::onLivingHurt)
-    }
+    val ITEM = registerItem(ID, MichiCapItem())
 
-    fun onLivingHurt(event: LivingDamageEvent.Pre) {
-        val player = event.entity
-        if (player !is ServerPlayer) return
+    fun register() {
+        ServerLivingEntityEvents.ALLOW_DAMAGE.register(ServerLivingEntityEvents.AllowDamage { entity, source, amount ->
+            val player = entity as? ServerPlayer ?: return@AllowDamage true
 
-        val helmet = player.getItemBySlot(EquipmentSlot.HEAD)
-        val helmetItem = MichiCap.ITEM.get()
-        if (helmet.item != helmetItem) return
+            val helmet = player.getItemBySlot(EquipmentSlot.HEAD)
+            if (helmet.item != ITEM.value()) return@AllowDamage true
 
-        if (player.cooldowns.isOnCooldown(helmet)) return
+            if (player.cooldowns.isOnCooldown(helmet)) return@AllowDamage true
 
-        val damage = event.newDamage
-        val currentHealth = player.health + player.absorptionAmount
-        val maxHealth = player.maxHealth + player.absorptionAmount
+            val currentHealth = player.health + player.absorptionAmount
+            val maxHealth = player.maxHealth + player.absorptionAmount
 
-        if (currentHealth <= damage && currentHealth == maxHealth) {
-            event.newDamage = 0f
-            player.health = 1.0f
-            player.absorptionAmount = 0f
-            player.cooldowns.addCooldown(helmet, 5 * 60 * 20)
-            player.level().playSound(null, player.blockPosition(), SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 1f, 1f)
-        }
+            if (currentHealth <= amount && currentHealth == maxHealth) {
+                player.health = 1.0f
+                player.absorptionAmount = 0f
+                player.cooldowns.addCooldown(helmet, 5 * 60 * 20)
+                player.level().playSound(null, player.blockPosition(), SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 1f, 1f)
+                return@AllowDamage false
+            }
+
+            true
+        })
     }
 }
-

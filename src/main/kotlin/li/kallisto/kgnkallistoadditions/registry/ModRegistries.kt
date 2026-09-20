@@ -1,21 +1,13 @@
 package li.kallisto.kgnkallistoadditions.registry
 
-import li.kallisto.kgnkallistoadditions.KGNKallistoAdditions
-import li.kallisto.kgnkallistoadditions.registry.creativemodetabs.ModCreativeModeTabs
-import net.minecraft.core.registries.BuiltInRegistries
-import net.neoforged.bus.api.IEventBus
-import net.neoforged.neoforge.registries.DeferredRegister
+import net.minecraft.core.Holder
+import net.minecraft.world.item.Item
+import net.minecraft.world.level.block.Block
 
 object ModRegistries {
-    val ITEMS = DeferredRegister.createItems(KGNKallistoAdditions.ID)
-    val BLOCKS = DeferredRegister.createBlocks(KGNKallistoAdditions.ID)
-    val PARTICLE_TYPE = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, KGNKallistoAdditions.ID)
-
-    fun register(eventBus: IEventBus) {
-        ITEMS.register(eventBus)
-        BLOCKS.register(eventBus)
-        PARTICLE_TYPE.register(eventBus)
-        ModCreativeModeTabs.register(eventBus)
-    }
+    // Fabric has no DeferredRegister equivalent - registration happens eagerly at
+    // class-init. These lists exist purely so the creative tab and datagen providers
+    // (which used DeferredRegister#getEntries under NeoForge) have something to iterate.
+    val items: MutableList<Holder.Reference<Item>> = mutableListOf()
+    val blocks: MutableList<Holder.Reference<Block>> = mutableListOf()
 }
-

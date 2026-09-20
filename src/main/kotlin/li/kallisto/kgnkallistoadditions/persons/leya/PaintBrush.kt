@@ -1,9 +1,15 @@
 package li.kallisto.kgnkallistoadditions.persons.leya
 
-import li.kallisto.kgnkallistoadditions.registry.ModRegistries
+import li.kallisto.kgnkallistoadditions.KGNKallistoAdditions
+import li.kallisto.kgnkallistoadditions.registry.RegistryHelper.registerItem
 import li.kallisto.kgnkallistoadditions.registry.RegistryHelper.setItemModId
+import net.minecraft.core.Holder
+import net.minecraft.core.Registry
 import net.minecraft.core.particles.ParticleType
 import net.minecraft.core.particles.SimpleParticleType
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
@@ -11,15 +17,22 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ToolMaterial
 import net.minecraft.world.level.Level
-import net.neoforged.bus.api.IEventBus
-import net.neoforged.neoforge.registries.DeferredHolder
 import kotlin.math.cos
 import kotlin.math.sin
 
 object PaintBrush {
     val ID = "paintbrush_sword"
 
-    val ITEM = ModRegistries.ITEMS.register(ID) { _ ->
+    // SimpleParticleType's constructor is protected (NeoForge patches it open); a tiny
+    // subclass is the vanilla-compatible way to instantiate it.
+    class ColorSplashParticleType : SimpleParticleType(true)
+
+    // The concrete SimpleParticleType, kept separately from its Holder since vanilla's
+    // Registry.registerForHolder only preserves the registry's own generic (ParticleType<*>),
+    // not the concrete subtype NeoForge's DeferredRegister used to hand back.
+    val COLOR_SPLASH_PARTICLE = ColorSplashParticleType()
+
+    val ITEM = registerItem(ID,
         object : Item(
             Properties()
                 .sword(ToolMaterial.NETHERITE, 3.0F, -2.4F)
@@ -50,7 +63,7 @@ object PaintBrush {
                                 val pz = player.z + dz * distance
 
                                 level.sendParticles(
-                                    COLOR_SPLASH_PARTICLE.get(),
+                                    COLOR_SPLASH_PARTICLE,
                                     px, py, pz,
                                     1,
                                     0.05,
@@ -68,12 +81,16 @@ object PaintBrush {
                 return InteractionResult.SUCCESS
             }
         }
+    )
+
+    val COLOR_SPLASH_PARTICLE_HOLDER: Holder.Reference<ParticleType<*>> = run {
+        val key = ResourceKey.create(Registries.PARTICLE_TYPE, KGNKallistoAdditions.locate("color_splash"))
+        val particleType: ParticleType<*> = COLOR_SPLASH_PARTICLE
+        Registry.registerForHolder(BuiltInRegistries.PARTICLE_TYPE, key, particleType)
     }
 
-    val COLOR_SPLASH_PARTICLE: DeferredHolder<ParticleType<*>, SimpleParticleType> =
-        ModRegistries.PARTICLE_TYPE.register("color_splash") { _ -> SimpleParticleType(true) }
-
-    fun register(eventBus: IEventBus) {
+    // Forces class-init in a fixed order from the main entrypoint.
+    fun register() {
     }
 }
 

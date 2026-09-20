@@ -2,38 +2,39 @@ package li.kallisto.kgnkallistoadditions
 
 import com.mojang.blaze3d.platform.InputConstants
 import li.kallisto.kgnkallistoadditions.ability.UseAbilityPacket
+import li.kallisto.kgnkallistoadditions.persons.joel.client.JoelMustacheClient
+import li.kallisto.kgnkallistoadditions.persons.leya.PaintBrushClient
+import li.kallisto.kgnkallistoadditions.persons.luca.client.LucaBeanieClient
+import li.kallisto.kgnkallistoadditions.persons.michi.client.MichiCapClient
+import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.minecraft.client.KeyMapping
-import net.neoforged.bus.api.IEventBus
-import net.neoforged.neoforge.client.event.ClientTickEvent
-import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent
-import net.neoforged.neoforge.client.network.ClientPacketDistributor
-import net.neoforged.neoforge.client.settings.KeyConflictContext
 import org.lwjgl.glfw.GLFW
 
-object KGNKallistoAdditionsClient {
+object KGNKallistoAdditionsClient : ClientModInitializer {
     val ABILITY_CATEGORY = KeyMapping.Category(KGNKallistoAdditions.locate("gameplay"))
 
     val ABILITY_KEY = KeyMapping(
         "key.${KGNKallistoAdditions.ID}.ability",
-        KeyConflictContext.IN_GAME,
         InputConstants.Type.KEYSYM,
         GLFW.GLFW_KEY_G,
         ABILITY_CATEGORY
     )
 
-    fun register(modEventBus: IEventBus, eventBus: IEventBus) {
-        modEventBus.addListener(::registerKeys)
-        eventBus.addListener(::onClientTick)
-    }
+    override fun onInitializeClient() {
+        KeyMappingHelper.registerKeyMapping(ABILITY_KEY)
 
-    fun onClientTick(event: ClientTickEvent.Post) {
-        if (ABILITY_KEY.consumeClick()) {
-            ClientPacketDistributor.sendToServer(UseAbilityPacket())
+        MichiCapClient.register()
+        LucaBeanieClient.register()
+        JoelMustacheClient.register()
+        PaintBrushClient.register()
+
+        ClientTickEvents.END_CLIENT_TICK.register { _ ->
+            while (ABILITY_KEY.consumeClick()) {
+                ClientPlayNetworking.send(UseAbilityPacket())
+            }
         }
-    }
-
-    fun registerKeys(event: RegisterKeyMappingsEvent) {
-        event.registerCategory(ABILITY_CATEGORY)
-        event.register(ABILITY_KEY)
     }
 }

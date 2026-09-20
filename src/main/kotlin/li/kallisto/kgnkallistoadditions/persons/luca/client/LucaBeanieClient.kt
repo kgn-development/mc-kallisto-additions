@@ -1,29 +1,27 @@
 package li.kallisto.kgnkallistoadditions.persons.luca.client
 
 import li.kallisto.kgnkallistoadditions.KGNKallistoAdditions
+import li.kallisto.kgnkallistoadditions.client.HeadArmorRenderer
 import li.kallisto.kgnkallistoadditions.persons.luca.LucaBeanie
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry
 import net.minecraft.client.model.geom.ModelLayerLocation
-import net.neoforged.bus.api.IEventBus
-import net.neoforged.neoforge.client.event.EntityRenderersEvent
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 
 object LucaBeanieClient {
     val MODEL_LAYER_LOCATION = ModelLayerLocation(KGNKallistoAdditions.locate(LucaBeanie.ID), "main")
 
-    fun register(eventBus: IEventBus) {
-        eventBus.addListener(::onRegisterClientExtensions)
-        eventBus.addListener(::onRegisterLayerDefinitions)
-    }
+    fun register() {
+        ModelLayerRegistry.registerModelLayer(MODEL_LAYER_LOCATION) { LucaBeanieModel.createHelmetLayer() }
 
-    fun onRegisterLayerDefinitions(event: EntityRenderersEvent.RegisterLayerDefinitions) {
-        event.registerLayerDefinition(
-            MODEL_LAYER_LOCATION
-        ) { LucaBeanieModel.createHelmetLayer() }
-    }
-
-    fun onRegisterClientExtensions(event: RegisterClientExtensionsEvent) {
-        if (!event.isItemRegistered(LucaBeanie.ITEM.get())) {
-            event.registerItem(LucaBeanieItemExtensions, LucaBeanie.ITEM.get())
-        }
+        ArmorRenderer.register(
+            ArmorRenderer.Factory { context ->
+                HeadArmorRenderer(
+                    context,
+                    LucaBeanieModel(context.bakeLayer(MODEL_LAYER_LOCATION)).modelPart,
+                    LucaBeanie.ASSET
+                )
+            },
+            LucaBeanie.ITEM.value()
+        )
     }
 }

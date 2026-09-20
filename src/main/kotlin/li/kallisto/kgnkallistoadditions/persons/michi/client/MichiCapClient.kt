@@ -1,29 +1,27 @@
 package li.kallisto.kgnkallistoadditions.persons.michi.client
 
 import li.kallisto.kgnkallistoadditions.KGNKallistoAdditions
+import li.kallisto.kgnkallistoadditions.client.HeadArmorRenderer
 import li.kallisto.kgnkallistoadditions.persons.michi.MichiCap
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry
 import net.minecraft.client.model.geom.ModelLayerLocation
-import net.neoforged.bus.api.IEventBus
-import net.neoforged.neoforge.client.event.EntityRenderersEvent
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 
 object MichiCapClient {
     val MODEL_LAYER_LOCATION = ModelLayerLocation(KGNKallistoAdditions.locate(MichiCap.ID), "main")
 
-    fun register(eventBus: IEventBus) {
-        eventBus.addListener(::onRegisterClientExtensions)
-        eventBus.addListener(::onRegisterLayerDefinitions)
-    }
+    fun register() {
+        ModelLayerRegistry.registerModelLayer(MODEL_LAYER_LOCATION) { MichiCapModel.createHelmetLayer() }
 
-    fun onRegisterLayerDefinitions(event: EntityRenderersEvent.RegisterLayerDefinitions) {
-        event.registerLayerDefinition(
-            MODEL_LAYER_LOCATION
-        ) { MichiCapModel.createHelmetLayer() }
-    }
-
-    fun onRegisterClientExtensions(event: RegisterClientExtensionsEvent) {
-        if (!event.isItemRegistered(MichiCap.ITEM.get())) {
-            event.registerItem(MichiCapItemExtensions, MichiCap.ITEM.get())
-        }
+        ArmorRenderer.register(
+            ArmorRenderer.Factory { context ->
+                HeadArmorRenderer(
+                    context,
+                    MichiCapModel(context.bakeLayer(MODEL_LAYER_LOCATION)).modelPart,
+                    MichiCap.ASSET
+                )
+            },
+            MichiCap.ITEM.value()
+        )
     }
 }

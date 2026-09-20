@@ -1,8 +1,8 @@
 package li.kallisto.kgnkallistoadditions.persons.luca
 
-import li.kallisto.kgnkallistoadditions.registry.ModRegistries
 import li.kallisto.kgnkallistoadditions.registry.RegistryHelper
 import li.kallisto.kgnkallistoadditions.registry.RegistryHelper.registerBlockWithItem
+import li.kallisto.kgnkallistoadditions.registry.RegistryHelper.registerItem
 import net.minecraft.util.Util
 import net.minecraft.resources.ResourceKey
 import net.minecraft.sounds.SoundEvents
@@ -15,7 +15,6 @@ import net.minecraft.world.item.equipment.EquipmentAssets
 import net.minecraft.world.level.block.FireflyBushBlock
 import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.level.block.state.BlockBehaviour
-import net.neoforged.bus.api.IEventBus
 import java.util.*
 import java.util.function.Consumer
 
@@ -26,7 +25,27 @@ object LucaBeanie {
         val REPARIS_LUCA_BEANIE: TagKey<Item> = RegistryHelper.createTag("repairs_${ID}")
     }
 
-    val ITEM = ModRegistries.ITEMS.register(ID, ::LucaBeanieItem)
+    // ARMOR_MATERIAL must be initialized before ITEM: LucaBeanieItem's constructor
+    // reads it eagerly now that registration happens at class-init instead of being
+    // deferred to a later registry-event phase like NeoForge's DeferredRegister did.
+    var ASSET: ResourceKey<EquipmentAsset> = EquipmentAssets.createId(ID)
+
+    val ARMOR_MATERIAL = ArmorMaterial(
+        37,
+        Util.make(
+            EnumMap(ArmorType::class.java),
+            Consumer { attribute: EnumMap<ArmorType, Int> ->
+                attribute[ArmorType.HELMET] = 3
+            }),
+        15,
+        SoundEvents.ARMOR_EQUIP_NETHERITE,
+        3f,
+        0.1f,
+        Tags.REPARIS_LUCA_BEANIE,
+        ASSET
+    )
+
+    val ITEM = registerItem(ID, LucaBeanieItem())
 
     val BLOCK =
         run {
@@ -45,24 +64,7 @@ object LucaBeanie {
             )
         }
 
-
-    var ASSET: ResourceKey<EquipmentAsset> = EquipmentAssets.createId(ID)
-
-    val ARMOR_MATERIAL = ArmorMaterial(
-        37,
-        Util.make(
-            EnumMap(ArmorType::class.java),
-            Consumer { attribute: EnumMap<ArmorType, Int> ->
-                attribute[ArmorType.HELMET] = 3
-            }),
-        15,
-        SoundEvents.ARMOR_EQUIP_NETHERITE,
-        3f,
-        0.1f,
-        Tags.REPARIS_LUCA_BEANIE,
-        ASSET
-    )
-
-    fun register(eventBus: IEventBus) {
+    // Forces class-init in a fixed order from the main entrypoint.
+    fun register() {
     }
 }
