@@ -27,11 +27,11 @@ class ModModelProvider(output: PackOutput) : ModelProvider(output, KGNKallistoAd
         itemModels.generateFlatItem(PaintBrush.ITEM.get(), ModelTemplates.FLAT_HANDHELD_ITEM)
     }
 
-    override fun getKnownBlocks(): Stream<out Holder<Block?>?> {
-        return emptyList<Holder<Block?>>().stream()
+    override fun getKnownBlocks(): Stream<out Holder<Block>> {
+        return emptyList<Holder<Block>>().stream()
     }
 
-    override fun getKnownItems(): Stream<out Holder<Item?>?> {
+    override fun getKnownItems(): Stream<out Holder<Item>> {
         return ModRegistries.ITEMS.entries.stream().filter { true }
     }
 }

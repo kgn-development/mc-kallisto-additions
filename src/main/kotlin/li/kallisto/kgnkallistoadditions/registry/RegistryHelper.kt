@@ -21,7 +21,7 @@ object RegistryHelper {
         return this.setId(ResourceKey.create(Registries.BLOCK, KGNKallistoAdditions.locate(name)))
     }
 
-    fun createTag(name: String): TagKey<Item?> {
+    fun createTag(name: String): TagKey<Item> {
         return ItemTags.create(KGNKallistoAdditions.locate(name))
     }
 

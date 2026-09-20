@@ -70,7 +70,7 @@ object PaintBrush {
         }
     }
 
-    val COLOR_SPLASH_PARTICLE: DeferredHolder<ParticleType<*>?, SimpleParticleType?> =
+    val COLOR_SPLASH_PARTICLE: DeferredHolder<ParticleType<*>, SimpleParticleType> =
         ModRegistries.PARTICLE_TYPE.register("color_splash") { _ -> SimpleParticleType(true) }
 
     fun register(eventBus: IEventBus) {

@@ -18,30 +18,30 @@ object LucaBeanieItemExtensions : IClientItemExtensions {
     ): Model<*> {
         return HumanoidModel<HumanoidRenderState>(
             ModelPart(
-                mutableListOf<ModelPart.Cube?>(), Map.of<String?, ModelPart?>(
+                mutableListOf<ModelPart.Cube>(), Map.of<String, ModelPart>(
                     "head",
                     ModelPart(
-                        mutableListOf<ModelPart.Cube?>(),
-                        Map.of<String?, ModelPart?>(
+                        mutableListOf<ModelPart.Cube>(),
+                        Map.of<String, ModelPart>(
                             "head",
                             LucaBeanieModel(
                                 Minecraft.getInstance().entityModels
                                     .bakeLayer(LucaBeanieClient.MODEL_LAYER_LOCATION)
                             ).modelPart,
                             "hat",
-                            ModelPart(mutableListOf<ModelPart.Cube?>(), mutableMapOf<String?, ModelPart?>())
+                            ModelPart(mutableListOf<ModelPart.Cube>(), mutableMapOf<String, ModelPart>())
                         )
                     ),
                     "body",
-                    ModelPart(mutableListOf<ModelPart.Cube?>(), mutableMapOf<String?, ModelPart?>()),
+                    ModelPart(mutableListOf<ModelPart.Cube>(), mutableMapOf<String, ModelPart>()),
                     "right_arm",
-                    ModelPart(mutableListOf<ModelPart.Cube?>(), mutableMapOf<String?, ModelPart?>()),
+                    ModelPart(mutableListOf<ModelPart.Cube>(), mutableMapOf<String, ModelPart>()),
                     "left_arm",
-                    ModelPart(mutableListOf<ModelPart.Cube?>(), mutableMapOf<String?, ModelPart?>()),
+                    ModelPart(mutableListOf<ModelPart.Cube>(), mutableMapOf<String, ModelPart>()),
                     "right_leg",
-                    ModelPart(mutableListOf<ModelPart.Cube?>(), mutableMapOf<String?, ModelPart?>()),
+                    ModelPart(mutableListOf<ModelPart.Cube>(), mutableMapOf<String, ModelPart>()),
                     "left_leg",
-                    ModelPart(mutableListOf<ModelPart.Cube?>(), mutableMapOf<String?, ModelPart?>())
+                    ModelPart(mutableListOf<ModelPart.Cube>(), mutableMapOf<String, ModelPart>())
                 )
             )
         )

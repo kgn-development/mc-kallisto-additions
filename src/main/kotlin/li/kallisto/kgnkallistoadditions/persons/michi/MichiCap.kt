@@ -2,7 +2,7 @@ package li.kallisto.kgnkallistoadditions.persons.michi
 
 import li.kallisto.kgnkallistoadditions.registry.ModRegistries
 import li.kallisto.kgnkallistoadditions.registry.RegistryHelper
-import net.minecraft.Util
+import net.minecraft.util.Util
 import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
@@ -23,19 +23,19 @@ object MichiCap {
     val ID = "michi_cap"
 
     object Tags {
-        val REPARIS_MICHI_HAT: TagKey<Item?> = RegistryHelper.createTag("repairs_${ID}")
+        val REPARIS_MICHI_HAT: TagKey<Item> = RegistryHelper.createTag("repairs_${ID}")
     }
 
     val ITEM = ModRegistries.ITEMS.register(ID, ::MichiCapItem)
 
-    var ASSET: ResourceKey<EquipmentAsset?> = EquipmentAssets.createId(ID)
+    var ASSET: ResourceKey<EquipmentAsset> = EquipmentAssets.createId(ID)
 
     val ARMOR_MATERIAL = ArmorMaterial(
         37,
         Util.make(
             EnumMap(ArmorType::class.java),
-            Consumer { attribute: EnumMap<ArmorType?, Int?>? ->
-                attribute!![ArmorType.HELMET] = 3
+            Consumer { attribute: EnumMap<ArmorType, Int> ->
+                attribute[ArmorType.HELMET] = 3
             }),
         15,
         SoundEvents.ARMOR_EQUIP_NETHERITE,

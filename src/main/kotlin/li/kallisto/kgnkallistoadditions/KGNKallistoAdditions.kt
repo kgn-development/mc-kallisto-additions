@@ -13,7 +13,7 @@ import li.kallisto.kgnkallistoadditions.registry.ModRegistries
 import li.kallisto.kgntemplatemod.datagen.ModDataGenerator
 import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.neoforged.fml.common.Mod
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.neoforge.common.NeoForge
@@ -72,8 +72,8 @@ object KGNKallistoAdditions {
         )
     }
 
-    fun locate(name: String): ResourceLocation {
-        return ResourceLocation.fromNamespaceAndPath(ID, name)
+    fun locate(name: String): Identifier {
+        return Identifier.fromNamespaceAndPath(ID, name)
     }
 }
 
