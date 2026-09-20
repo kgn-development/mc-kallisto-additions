@@ -20,10 +20,11 @@ object ModCreativeModeTabs {
             .icon { ItemStack(Items.NETHER_STAR) }
             .title(Component.translatable("creativetab.${KGNKallistoAdditions.ID}.kallisto_abilities_tab"))
             .displayItems { _, output ->
+                // Items only: registerBlockWithItem puts every block's BlockItem into
+                // ITEMS as well, so also iterating BLOCKS would offer each of those
+                // twice. Creative tabs throw on a duplicate entry since 26.1 instead
+                // of silently dropping it.
                 ModRegistries.ITEMS.entries.forEach {
-                    output.accept(it.get())
-                }
-                ModRegistries.BLOCKS.entries.forEach {
                     output.accept(it.get())
                 }
             }

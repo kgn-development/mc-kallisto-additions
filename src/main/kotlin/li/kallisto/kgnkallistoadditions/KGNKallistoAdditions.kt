@@ -11,11 +11,8 @@ import li.kallisto.kgnkallistoadditions.persons.michi.MichiCap
 import li.kallisto.kgnkallistoadditions.persons.michi.client.MichiCapClient
 import li.kallisto.kgnkallistoadditions.registry.ModRegistries
 import li.kallisto.kgntemplatemod.datagen.ModDataGenerator
-import net.minecraft.client.renderer.ItemBlockRenderTypes
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer
 import net.minecraft.resources.Identifier
 import net.neoforged.fml.common.Mod
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 import org.apache.logging.log4j.Level
@@ -38,7 +35,6 @@ object KGNKallistoAdditions {
 
         MOD_BUS.addListener(ModDataGenerator::onGatherClientData)
         MOD_BUS.addListener(::registerPayloads)
-        MOD_BUS.addListener(::onClientSetup)
 
         MichiCap.register(NeoForge.EVENT_BUS)
         LucaBeanie.register(NeoForge.EVENT_BUS)
@@ -55,12 +51,6 @@ object KGNKallistoAdditions {
 
         })
     }
-
-    fun onClientSetup(event: FMLClientSetupEvent) {
-        ItemBlockRenderTypes.setRenderLayer(JoelMustache.BLOCK.get(), ChunkSectionLayer.CUTOUT)
-        ItemBlockRenderTypes.setRenderLayer(LucaBeanie.BLOCK.get(), ChunkSectionLayer.CUTOUT)
-    }
-
 
     fun registerPayloads(event: RegisterPayloadHandlersEvent) {
         val registrar = event.registrar(ID)
