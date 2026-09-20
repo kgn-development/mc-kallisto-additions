@@ -1,6 +1,5 @@
 package li.kallisto.kgnkallistoadditions.datagen.providers
 
-import li.kallisto.kgnkallistoadditions.persons.cosimo.Druid
 import li.kallisto.kgnkallistoadditions.persons.joel.JoelMustache
 import li.kallisto.kgnkallistoadditions.persons.luca.LucaBeanie
 import li.kallisto.kgnkallistoadditions.registry.ModRegistries
@@ -12,7 +11,6 @@ import net.minecraft.world.level.block.Block
 class ModBlockLootTableSubProvider(registries: HolderLookup.Provider) :
     BlockLootSubProvider(setOf(), FeatureFlags.REGISTRY.allFlags(), registries) {
     override fun generate() {
-        dropSelf(Druid.DRUID_HEART.get())
         dropSelf(LucaBeanie.BLOCK.get())
         dropSelf(JoelMustache.BLOCK.get())
     }

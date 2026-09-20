@@ -1,19 +1,14 @@
 package li.kallisto.kgnkallistoadditions
 
-import dev.tocraft.walkers.api.platform.ApiLevel
 import li.kallisto.kgnkallistoadditions.ability.UseAbilityPacket
-import li.kallisto.kgnkallistoadditions.persons.cosimo.Druid
-import li.kallisto.kgnkallistoadditions.persons.ginger.Trumpet
 import li.kallisto.kgnkallistoadditions.persons.joel.JoelMustache
 import li.kallisto.kgnkallistoadditions.persons.joel.client.JoelMustacheClient
 import li.kallisto.kgnkallistoadditions.persons.leya.PaintBrush
 import li.kallisto.kgnkallistoadditions.persons.leya.PaintBrushClient
 import li.kallisto.kgnkallistoadditions.persons.luca.LucaBeanie
 import li.kallisto.kgnkallistoadditions.persons.luca.client.LucaBeanieClient
-import li.kallisto.kgnkallistoadditions.persons.lukas.StinkyTouch
 import li.kallisto.kgnkallistoadditions.persons.michi.MichiCap
 import li.kallisto.kgnkallistoadditions.persons.michi.client.MichiCapClient
-import li.kallisto.kgnkallistoadditions.persons.noel.AppleJuice
 import li.kallisto.kgnkallistoadditions.registry.ModRegistries
 import li.kallisto.kgntemplatemod.datagen.ModDataGenerator
 import net.minecraft.client.renderer.ItemBlockRenderTypes
@@ -48,13 +43,7 @@ object KGNKallistoAdditions {
         MichiCap.register(NeoForge.EVENT_BUS)
         LucaBeanie.register(NeoForge.EVENT_BUS)
         JoelMustache.register(NeoForge.EVENT_BUS)
-        AppleJuice.register(NeoForge.EVENT_BUS)
-        StinkyTouch.register(NeoForge.EVENT_BUS)
-        Trumpet.register(NeoForge.EVENT_BUS)
-        Druid.register(NeoForge.EVENT_BUS)
         PaintBrush.register(NeoForge.EVENT_BUS)
-
-        ApiLevel.setApiLevel(ApiLevel.API_ONLY);
 
         runForDist(clientTarget = {
             MichiCapClient.register(MOD_BUS)

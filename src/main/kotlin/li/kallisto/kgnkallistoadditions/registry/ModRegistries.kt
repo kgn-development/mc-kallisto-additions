@@ -5,21 +5,16 @@ import li.kallisto.kgnkallistoadditions.registry.creativemodetabs.ModCreativeMod
 import net.minecraft.core.registries.BuiltInRegistries
 import net.neoforged.bus.api.IEventBus
 import net.neoforged.neoforge.registries.DeferredRegister
-import net.neoforged.neoforge.registries.NeoForgeRegistries
 
 object ModRegistries {
     val ITEMS = DeferredRegister.createItems(KGNKallistoAdditions.ID)
     val BLOCKS = DeferredRegister.createBlocks(KGNKallistoAdditions.ID)
-    val ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, KGNKallistoAdditions.ID)
     val PARTICLE_TYPE = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, KGNKallistoAdditions.ID)
-    val SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, KGNKallistoAdditions.ID)
 
     fun register(eventBus: IEventBus) {
         ITEMS.register(eventBus)
         BLOCKS.register(eventBus)
-        ATTACHMENT_TYPES.register(eventBus)
         PARTICLE_TYPE.register(eventBus)
-        SOUND_EVENTS.register(eventBus)
         ModCreativeModeTabs.register(eventBus)
     }
 }

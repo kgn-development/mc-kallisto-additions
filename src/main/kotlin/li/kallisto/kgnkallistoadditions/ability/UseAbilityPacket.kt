@@ -20,7 +20,6 @@ class UseAbilityPacket() : CustomPacketPayload {
             )
 
         fun handle(message: UseAbilityPacket, context: IPayloadContext) {
-            li.kallisto.kgnkallistoadditions.persons.cosimo.AbilityPacketHandler.handle(message, context)
             li.kallisto.kgnkallistoadditions.persons.luca.AbilityPacketHandler.handle(message, context)
             li.kallisto.kgnkallistoadditions.persons.joel.AbilityPacketHandler.handle(message, context)
         }
