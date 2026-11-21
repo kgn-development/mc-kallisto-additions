@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mc-kallisto-additions:cannabeanikum_solaris"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "mc-kallisto-additions:blocks/cannabeanikum_solaris"
+}

@@ -8,24 +8,25 @@
     "${mod_authors}"
   ],
   "license": "${mod_license}",
+  "icon": "assets/${mod_id}/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
       {
         "adapter": "kotlin",
-        "value": "li.kallisto.kgnkallistoadditions.KGNKallistoAdditions"
+        "value": "li.kallisto.mcKallistoAdditions.McKallistoAdditions"
       }
     ],
     "client": [
       {
         "adapter": "kotlin",
-        "value": "li.kallisto.kgnkallistoadditions.KGNKallistoAdditionsClient"
+        "value": "li.kallisto.mcKallistoAdditions.McKallistoAdditionsClient"
       }
     ],
     "fabric-datagen": [
       {
         "adapter": "kotlin",
-        "value": "li.kallisto.kgnkallistoadditions.datagen.ModDataGenerator"
+        "value": "li.kallisto.mcKallistoAdditions.datagen.ModDataGenerator"
       }
     ]
   },

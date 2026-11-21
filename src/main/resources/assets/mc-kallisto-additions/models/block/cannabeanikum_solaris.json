@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "mc-kallisto-additions:block/cannabeanikum_solaris"
+  }
+}

@@ -2,12 +2,12 @@
   "layers": {
     "humanoid": [
       {
-        "texture": "kgnkallistoadditions:luca_beanie"
+        "texture": "mc-kallisto-additions:luca_beanie"
       }
     ],
     "humanoid_baby": [
       {
-        "texture": "kgnkallistoadditions:luca_beanie"
+        "texture": "mc-kallisto-additions:luca_beanie"
       }
     ]
   }

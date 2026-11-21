@@ -1,3 +1,3 @@
-# mc-template
+# Kallisto Additions
 
-Template für neue Minecraft Mods
+KGN specific additions.

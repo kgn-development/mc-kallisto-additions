@@ -2,12 +2,12 @@
   "layers": {
     "humanoid": [
       {
-        "texture": "kgnkallistoadditions:joel_mustache"
+        "texture": "mc-kallisto-additions:joel_mustache"
       }
     ],
     "humanoid_baby": [
       {
-        "texture": "kgnkallistoadditions:joel_mustache"
+        "texture": "mc-kallisto-additions:joel_mustache"
       }
     ]
   }

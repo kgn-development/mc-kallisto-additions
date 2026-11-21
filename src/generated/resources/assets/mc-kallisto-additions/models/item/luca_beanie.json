@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mc-kallisto-additions:item/luca_beanie"
+  }
+}
